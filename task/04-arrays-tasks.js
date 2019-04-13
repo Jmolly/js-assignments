@@ -270,7 +270,6 @@ function getSecondItems(arr) {
  */
 function propagateItemsByPositionIndex(arr) {
    throw new Error('Not implemented');
-   // return arr.map(el => )
 }
 
 
@@ -306,7 +305,8 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-   throw new Error('Not implemented');
+   // throw new Error('Not implemented');
+   return arr.filter(el => el > 0 && typeof el === 'number').length;
 }
  
 /** 
