@@ -160,7 +160,8 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(fn, ...args) {
+function partialUsingArguments(fn) {
+    let args = [...arguments].slice(1);
     return (...moreArgs) => fn(...args, ...moreArgs);
 }
 
