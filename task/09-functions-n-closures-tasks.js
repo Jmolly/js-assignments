@@ -162,8 +162,8 @@ function logger(func, logFunc) {
  */
 function partialUsingArguments(fn) {
     let args = [...arguments].slice(1);
-    return function(...moreArgs) {
-        return fn(...args, ...moreArgs);
+    return function() {
+        return fn(...args, ...arguments);
     } 
 }
 
