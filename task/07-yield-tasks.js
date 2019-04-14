@@ -34,23 +34,18 @@
  */
 function* get99BottlesOfBeer() {
     let bottlesCount = 99;
-    let result = '';
-    const ending = 
-        '1 bottle of beer on the wall, 1 bottle of beer.\n'+
-        'Take one down and pass it around, no more bottles of beer on the wall.\n'+
-        'No more bottles of beer on the wall, no more bottles of beer.\n'+
-        'Go to the store and buy some more, 99 bottles of beer on the wall.\n'
 
     while (bottlesCount > 1){
-        
-        result += `${bottlesCount} bottles of beer on the wall, ${bottlesCount} bottles of beer.\n`;
-        result += `Take one down and pass it around, ${bottlesCount - 1} bottles of beer on the wall.\n`;
-        yield bottlesCount--;
-
+        yield `${bottlesCount} bottles of beer on the wall, ${bottlesCount} bottles of beer.`;
+        bottlesCount--;
+        (bottlesCount !== 1) ? yield `Take one down and pass it around, ${bottlesCount} bottles of beer on the wall.` :
+        yield 'Take one down and pass it around, 1 bottle of beer on the wall.';
     }
-
-    return result + ending;
-    throw new Error('Not implemented');
+    
+    yield '1 bottle of beer on the wall, 1 bottle of beer.';
+    yield 'Take one down and pass it around, no more bottles of beer on the wall.';
+    yield 'No more bottles of beer on the wall, no more bottles of beer.';
+    yield 'Go to the store and buy some more, 99 bottles of beer on the wall.';
 }
 
 
@@ -64,7 +59,18 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    throw new Error('Not implemented');
+    let count = 39;
+    let preprevious = 1;
+    let previous = 0;
+    let current = 0;
+    
+    while (count > 0) {
+        yield current;
+        current = previous + preprevious;
+        preprevious = previous;
+        previous = current;
+        count --;
+    }
 }
 
 
