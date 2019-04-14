@@ -150,7 +150,13 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+    let distPoints = (point.x - circle.center.x) * (point.x - circle.center.x) + (point.y - circle.center.y) * (point.y - circle.center.y);
+    let radius = circle.radius * circle.radius;
+    if (distPoints < radius) {
+        return true;
+    }
+
+    return false;
 }
 
 
@@ -419,7 +425,20 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+    let aNumRows = m1.length;
+    let aNumCols = m1[0].length;
+    let bNumCols = m2[0].length;
+    let resultMatrix = new Array(aNumRows);
+    for (let r = 0; r < aNumRows; ++r) {
+        resultMatrix[r] = new Array(bNumCols);
+        for (let c = 0; c < bNumCols; ++c) {
+            resultMatrix[r][c] = 0;
+            for (let i = 0; i < aNumCols; ++i) {
+                resultMatrix[r][c] += m1[r][i] * m2[i][c];
+        }
+    }
+    }
+    return resultMatrix;
 }
 
 

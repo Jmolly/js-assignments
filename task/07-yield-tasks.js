@@ -33,6 +33,23 @@
  *
  */
 function* get99BottlesOfBeer() {
+    let bottlesCount = 99;
+    let result = '';
+    const ending = 
+        '1 bottle of beer on the wall, 1 bottle of beer.\n'+
+        'Take one down and pass it around, no more bottles of beer on the wall.\n'+
+        'No more bottles of beer on the wall, no more bottles of beer.\n'+
+        'Go to the store and buy some more, 99 bottles of beer on the wall.\n'
+
+    while (bottlesCount > 1){
+        
+        result += `${bottlesCount} bottles of beer on the wall, ${bottlesCount} bottles of beer.\n`;
+        result += `Take one down and pass it around, ${bottlesCount - 1} bottles of beer on the wall.\n`;
+        yield bottlesCount--;
+
+    }
+
+    return result + ending;
     throw new Error('Not implemented');
 }
 

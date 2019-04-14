@@ -38,7 +38,7 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-   return Array.apply(null, new Array(len)).map((el, ind) => ind * 2 + 1)
+   return [...Array(len)].map((el, ind) => ind * 2 + 1)
 }
 
 
@@ -264,12 +264,16 @@ function getSecondItems(arr) {
  * @example :
  *  [] => []
  *  [ 1 ] => [ 1 ]
- *  [ 'a', 'b' ] => [ 'a', 'b','b' ]
+ *  [ 'a', 'b' ] => [ 'a', 'b','b' ]  //[[a], [b, b]]
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(arr) {
-   throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) { 
+   let result = [];
+
+   arr.map((el, i) => result = [...result, ...(new Array(i+1).fill(el))]);
+
+   return result;
 }
 
 
@@ -323,7 +327,33 @@ function getPositivesCount(arr) {
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-   throw new Error('Not implemented');
+
+   const obj = {
+      'one': 1,
+      'two': 2,
+      'three': 3,
+      'four': 4,
+      'five': 5,
+      'six': 6,
+      'seven': 7,
+      'eight': 8,
+      'nine': 9,
+      'zero': 0
+   }
+   const objRev = {
+      1: 'one',
+      2: 'two',
+      3: 'three',
+      4: 'four',
+      5: 'five',
+      6: 'six',
+      7: 'seven',
+      8: 'eight',
+      9: 'nine',
+      0: 'zero'
+   }
+
+   return arr.map(el => obj[el]).sort((a, b) => a - b).map(el => objRev[el]);
 }
 
 /** 
@@ -417,13 +447,7 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  */
 function sortCitiesArray(arr) {
-
-   // let sorting = (arr) => {
-
-   // }
-
-   // return arr.sort()
-   throw new Error('Not implemented');
+   return arr.sort((a,b) => (a.country > b.country) ? 1 : ((b.country > a.country) ? -1 : (a.city > b.city) ? 1 : ((b.city > a.city) ? -1 : 0)))
 }
 
 /**
@@ -445,7 +469,7 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]   
  */
 function getIdentityMatrix(n) {
-   throw new Error('Not implemented');
+   return [...Array(n)].map((el, index, a) => a.map(el => +!index--));
 }
 
 /**
@@ -462,7 +486,7 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-   return Array.apply(null, new Array(end-start+1)).map((el) => start++);
+   return [...Array(end-start+1)].map((el) => start++);
 }
 
 /**
@@ -544,7 +568,7 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-   throw new Error('Not implemented');
+   return indexes.reduce((acc, el) => acc = acc[el], arr);
 }
 
 
@@ -567,15 +591,11 @@ function getElementByIndexes(arr, indexes) {
  * 
  */
 function swapHeadAndTail(arr) {
-   throw new Error('Not implemented');
-   let head = arr.slice(0, Math.floor(arr.length / 2));
-   let tail = arr.slice(Math.ceil(arr.length / 2) + 1);
-   let middle = '';
-   let result = [];
-   (arr.length % 2 === 0) ? middle : middle = arr.splice(Math.ceil(arr.length / 2), 1);
-   (arr.length % 2 === 0) ? result = [...head, ...middle, tail] : result = [...head, tail]
-   return result;
-    throw new Error('Not implemented');
+   const head = arr.slice(0, Math.floor(arr.length / 2));
+   const tail = arr.slice(Math.ceil(arr.length / 2));
+   const middle = arr.splice(Math.floor(arr.length / 2), 1);
+   
+   return (arr.length % 2 === 0) ? [...tail, ...middle, ...head] : [...tail, ...head];
 }
 
 

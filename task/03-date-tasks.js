@@ -56,7 +56,7 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   let year = date.getFullYear();
+   const year = date.getFullYear();
    return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
 }
 
@@ -77,11 +77,11 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   let duration = (endDate - startDate);
+   const duration = (endDate - startDate);
    let milliseconds = parseInt((duration % 1000));
    let seconds = Math.floor((duration / 1000) % 60);
    let minutes = Math.floor((duration / (1000 * 60)) % 60);
-   let hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+   const hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
    
    (milliseconds) ? milliseconds : milliseconds = '000';
    (seconds) ? seconds : seconds = '00';
